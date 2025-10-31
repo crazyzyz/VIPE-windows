@@ -1,4 +1,19 @@
+# ViPE-Windows ： The Windows version of Vipe
 # ViPE: Video Pose Engine for Geometric 3D Perception
+
+
+
+1. **Please note!** This is a Windows version, and the original author is: [https://github.com/nv-tlabs/vipe](https://github.com/nv-tlabs/vipe). However, I needed to train on Windows, and there was a very tricky error during installation. After a few days of handling and modifications, I have solved the issue. This version is for exploring the Windows compatibility of the official version.
+
+2. When using the official installation, an error occurs, which is specific to the Windows version. This issue does not happen on Linux. The general problem is that the code uses the long template parameter for Torch tensors (e.g., `data_ptr<long>`, `PackedTensorAccessor32<long, ...>`). On Windows/MSVC, `long` is not 64-bit, causing a mismatch with the expected `int64_t` interface in PyTorch, leading to linking/type mismatch errors. I modified the relevant `long` types to `int64_t` in `csrc/slam_ext/geom_kernels.cu` and standardized the template parameters of `packed_accessor32` to `int64_t`, and then the compilation passed. In a previous attempt, I also encountered an issue where the toolchain environment variable caused standard headers to be inaccessible (the `conda run` wrapper modified `INCLUDE`), but this was resolved by building directly with the activated environment.
+
+3. **If you are a beginner,** you need to pay attention to the use of `requirements.in`. You need to run `uv pip compile --emit-index-url --prerelease=allow -o envs/requirements.txt envs/requirements.in` to generate your new `requirements.txt`. This will quickly help you build and install ViPE.
+
+If you want to try the Windows version, you can refer to this project of mine.
+
+
+
+
 
 <p align="center">
   <img src="assets/teaser.gif" alt="teaser"/>
