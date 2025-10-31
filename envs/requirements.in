@@ -1,0 +1,23 @@
+torch==2.7.0
+torchvision==0.22.0
+torchaudio==2.7.0
+--extra-index-url https://download.pytorch.org/whl/cu128
+click
+numpy
+einops
+omegaconf
+tqdm
+rerun-sdk
+imageio[ffmpeg]
+opencv-python
+matplotlib
+python-pycg
+timm
+transformers
+gdown
+OpenEXR<3.3.0
+kornia
+hydra-core
+ray
+ninja
+viser
